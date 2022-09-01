@@ -1,0 +1,134 @@
+/***** Linux study day1 *****/
+
+[wlan(Wireless LAN) 설정]
+접속된 무선 AP SSID 확인
+$ iwconfig wlan0 -r
+$ iwconfig
+
+wlan0 IP 주소확인
+$ iwconfig wlan0 -r
+
+[AP(Access Point) scan] 
+$ wpa_cli -i wlan0 scan
+$ wpa_cli -i wlan0 scan_results
+
+[Check the internet connection]
+$ ping www.google.com -c 5
+
+
+[SSID (Service Set Identifier)]
+무선랜을 통해 전송되는 패킷들의 각 헤더에 
+덧 붙여지는 32byte 길이의 고유 식별자 
+
+[Wi-Fi (Wireless Fidelity)] 
+IEEE802.11 기술규격의 브랜드 명이 wireless fidelity이며, 
+줄여서 Wi-Fi(와이파이)라고 읽는다. 
+※ Fidelity
+
+Wi-fi 규격에는 
+표준명	Wi-Fi(무선 LAN) 규격	최대 통신 속도	주파수(GHz)
+WIFI 1		802.11 a			54Mbps		2.4
+WIFI 2		802.11 b			11Mbps		5
+WIFI 3		802.11 g			54Mbps		2.4
+WIFI 4		802.11 n			600Mbps		2.4/5
+WIFI 5		802.11 ac			2.6Gbps		5
+WIFI 6		802.11 ax			10Gbps		2.4/5
+WIFI 7		802.11 be			30Gbps		2.4/5/6
+
+내 라즈베리 파이는 라즈베리3 B 모델로 802.11n 규격이며
+주파수 2.4GHz 이기 때문에 5G를 인식하지 못했던 것이었다.
+이번에 새로 산 노트북 Omen16은 WIFI6 802.11ax 규격을 가지고 있다.
+
+[Raspbian Update]
+$ sudo apt-get update
+$ sudo apt-get upgrade
+
+<<<<<<Linux 구조>>>>>
+[OS(Operating System)]
+- 컴퓨터 시스템 자원관리자
+- 컴퓨터 자원을 추상화 시키는 SW
+- 컴퓨터 하드웨어 자원을 제어 
+- S/W 실행될 수 있는 환경 제공
+
+[Kernel]
+- 운영환경의 핵심 S/W
+
+[System Call]
+- 커널에 접근하기위한 인터페이스 진입점 (Entry point) 
+
+[Shell]
+- 사용자의 명령을 분석하고 실행하는 명령어 해석기(Command interpreter)
+- 사용자의 리눅스 커널 사이의 인터페이스를 제공
+
+[Prompt]
+- 컴퓨터가 입력을 기다리고 있음을 가리키기 위해 화면에 나타내느 표시
+
+[Library]
+- 응용 S/W에서 공통적으로 쓰이는 함수들
+
+[Utility]
+- 사용자 편의를 위해 시스템에서 제공하는 프로그램
+- 파일시스템에 실행파일로 존재함
+
+
+로그인 프로세스는 사용자 계정 정보를 파일로 관리함
+$ cat /etc/passwd 
+jeongmateo:x:1000:1000:,,,:/home/jeongmateo:/bin/bash
+암호화된 패스워드 저장
+$ cat /etc/shadow
+jeongmateo:$y$j9T$YuoNjIX8PasdB2N0dfjcsM0V.$y11HTk/cjd6O9A41233aCS7S.lqGkOryF/HIcwzsQX.Z5:19234:0:99999:7:::
+그룹의 정보들
+$ cat /etc/group
+
+[현재(작업)디렉토리(Current Wokring Directory) 경로
+- 상대경로의 기준이 되는 경로
+- 각 프로세스의 저장된 속성
+$ pwd
+/home/jeongmateo
+
+[리눅스 명령어 모음집]
+ls 		디렉토리 목록을 출력함
+cp	 	파일 복사
+rm 		파일 삭제
+mv 		파일 이동, 파일명 변경
+which 		명령어의 위치하고 있는 경로를 출력함
+find 		파일이나 명령어를 찾음
+clear 		화면을 지움
+echo		인수로 지정한 문자열을 출력함
+cd 		현재 디렉토리를 이동함
+ln 		링크파일을 생성함
+more 		파일의 내용을 페이지단위로 출력함
+grep 		파일 내의 내용을 패턴을 이용해 검색
+tar 		여러 개의 파일을 하나의 파일로 묶음
+touch 		새로운파일 생성, 파일의 시간정보 갱신
+mkdir 		디렉토리를 생성함
+rmdir		디렉토리를 삭제함
+pwd 		현재 디렉토리를 출력함
+cat 		파일의 내용을 출력함
+wc 		문서 내에서 줄(단어, 글자)의 수를 출력함
+chmod 	파일의 mode(권한 및 SUID/SGID/Sticky bit)를 변경함
+chown 	파일의 소유정보를 변경함
+chgrp 		파일의 소유정보(그룹)를 변경함
+mount 	디바이스를 파일 시스템에 연결함
+reboot 	시스템 재부팅
+poweroff 	시스템 종료
+halt 		시스템 종료
+du 		디스크의 사용량을 출력
+df 		디스크의 남은용량을 출력
+dmesg 	커널 메세지를 출력함
+top 		시스템의 현재 프로세스들의 상태 모니터링
+ps 		프로세스의 상태 출력
+kill 		시그널을 전송함
+logout 	로그아웃
+who 		사용자의 정보 출력
+adduser 	새로운 사용자 계정을 생성함
+passwd 	사용자계정의 비밀번호를 변경함
+wall 		로그인한 다른 사용자에게 메세지를 전송함
+man 		메뉴얼 유틸리티
+date 		현재 시간을 출력함
+cal 		달력을 출력
+sudo 		다른 사용자의 보안 권한으로 명령어를 수행
+su 		다른계정으로 로그인
+
+
+
